@@ -62,6 +62,10 @@ object NotificationHelper {
 			if (isLowImportance) NotificationManager.IMPORTANCE_LOW
 			else NotificationManager.IMPORTANCE_DEFAULT
 
+		// Skip creating notification channel for older versions
+		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O)
+			return
+
 		val channel = NotificationChannel(channelId, name, importance)
 
 		// Register the channel with the system; you can't change the importance
