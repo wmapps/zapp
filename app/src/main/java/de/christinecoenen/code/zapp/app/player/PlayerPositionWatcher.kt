@@ -1,7 +1,7 @@
 package de.christinecoenen.code.zapp.app.player
 
 import androidx.media3.common.Player
-import java.time.Duration
+import org.joda.time.Duration
 import java.util.*
 import kotlin.concurrent.timer
 
@@ -12,8 +12,8 @@ class PlayerPositionWatcher(
 
 	companion object {
 		private const val TimerName = "PlayPositionTimer"
-		private val TimerStartDelay = Duration.ofSeconds(1)
-		private val TimerInterval = Duration.ofSeconds(1)
+		private val TimerStartDelay = Duration(1)
+		private val TimerInterval = Duration(1)
 	}
 
 	private var timer: Timer? = null
@@ -31,7 +31,7 @@ class PlayerPositionWatcher(
 		timer?.cancel()
 
 		if (isPlaying) {
-			timer = timer(TimerName, true, TimerStartDelay.toMillis(), TimerInterval.toMillis()) {
+			timer = timer(TimerName, true, TimerStartDelay.millis, TimerInterval.millis) {
 				onPositionChanged()
 			}
 		}
